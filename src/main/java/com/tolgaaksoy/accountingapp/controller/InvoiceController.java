@@ -6,6 +6,7 @@ import com.tolgaaksoy.accountingapp.response.APIResponse;
 import com.tolgaaksoy.accountingapp.service.InvoiceService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,11 +20,13 @@ public class InvoiceController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ROLE_ACCOUNTANT')")
     public ResponseEntity<APIResponse> createInvoice(@RequestBody InvoiceRequest invoiceRequest) {
         return invoiceService.createInvoice(invoiceRequest);
     }
 
     @GetMapping("/search")
+    @PreAuthorize("hasRole('ROLE_ACCOUNTANT')")
     public ResponseEntity<APIResponse> searchByInvoiceStatus(Pageable pageable, @RequestParam(required = false) InvoiceStatus invoiceStatus) {
         return invoiceService.getInvoicePage(pageable, invoiceStatus);
     }
