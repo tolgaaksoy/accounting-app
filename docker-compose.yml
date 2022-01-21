@@ -1,0 +1,8 @@
+version: '3.1'
+services:
+  app:
+    container_name: accounting-app
+    image: accounting-app
+    build: ./
+    ports:
+      - "9999:8080"
