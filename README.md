@@ -50,3 +50,13 @@ $ docker compose-up
 ## Documentation
 
 Swagger: http://localhost:8080/api-docs/swagger-ui/index.html
+
+## Curl
+| Description | Curl  | Token  | Role       |
+|-------------|-------|--------|------------|
+| Signup new account   | curl --location --request POST 'http://localhost:8080/users/signup' \ --header 'Content-Type: application/json' \ --data-raw '{     "username": "username-1",     "password": "password-1",     "email": "mail-1@mail.com",     "roleList": [         "ROLE_ACCOUNTANT"     ],         "name": "name-1",     "surname": "surname-1" }' | None   | None       |
+| Login an account   | curl --location --request POST 'http://localhost:8080/users/signin' \ --header 'Content-Type: application/json' \ --data-raw '{     "username": "username-1",     "password": "password-1" }' | None   | None       |
+| Search User   | curl --location --request GET 'http://localhost:8080/users/username-1' \ --header 'Authorization: Bearer ' | Bearer | ROLE_ADMIN |
+| Who Am I   | curl --location --request GET 'http://localhost:8080/users/me' \ --header 'Authorization: Bearer ' |Bearer | NONE       |
+| Create Invoice   | curl --location --request POST 'http://localhost:8080/invoice/create' \ --header 'Content-Type: application/json' \ --header 'Authorization: Bearer ' \ --data-raw '{     "firstName": "John",     "lastName": "Doe",     "email": "john@doe.com",     "amount": 400,     "productName": "USB DISC",     "billNo": "TR000" }' | Bearer |ROLE_ACCOUNTANT |
+| Search Invoice   | curl --location --request GET 'http://localhost:8080/invoice/search?number=int&size=int&invoiceStatus=invoiceStatus' \ --header 'Authorization: Bearer ' |Bearer |ROLE_ACCOUNTANT |
