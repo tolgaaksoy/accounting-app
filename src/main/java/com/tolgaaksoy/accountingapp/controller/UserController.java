@@ -1,6 +1,8 @@
 package com.tolgaaksoy.accountingapp.controller;
 
-import com.tolgaaksoy.accountingapp.model.dto.user.*;
+import com.tolgaaksoy.accountingapp.model.dto.user.SignInRequestDto;
+import com.tolgaaksoy.accountingapp.model.dto.user.SignUpRequestDto;
+import com.tolgaaksoy.accountingapp.response.APIResponse;
 import com.tolgaaksoy.accountingapp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,24 +19,24 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signin")
-    public ResponseEntity<SignInResponseDto> login(@RequestBody SignInRequestDto signInRequestDto) {
+    public ResponseEntity<APIResponse> login(@RequestBody SignInRequestDto signInRequestDto) {
         return userService.signin(signInRequestDto);
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<SignUpResponseDto> signup(@RequestBody SignUpRequestDto signInRequestDto) {
+    public ResponseEntity<APIResponse> signup(@RequestBody SignUpRequestDto signInRequestDto) {
         return userService.signup(signInRequestDto);
     }
 
     @GetMapping(value = "/{username}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<UserInfoResponseDto> search(@PathVariable String username) {
+    public ResponseEntity<APIResponse> search(@PathVariable String username) {
         return userService.search(username);
     }
 
     @GetMapping(value = "/me")
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_ACCOUNTANT')")
-    public ResponseEntity<UserInfoResponseDto> whoami(HttpServletRequest request) {
+    public ResponseEntity<APIResponse> whoami(HttpServletRequest request) {
         return userService.whoami(request);
     }
 

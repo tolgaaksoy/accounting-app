@@ -5,6 +5,7 @@ import com.tolgaaksoy.accountingapp.mapper.UserMapper;
 import com.tolgaaksoy.accountingapp.model.dto.user.*;
 import com.tolgaaksoy.accountingapp.model.entity.user.User;
 import com.tolgaaksoy.accountingapp.repository.UserRepository;
+import com.tolgaaksoy.accountingapp.response.APIResponse;
 import com.tolgaaksoy.accountingapp.security.JwtTokenProvider;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.Instant;
 import java.util.Optional;
 
 @Service
@@ -35,7 +37,7 @@ public class UserService {
         this.authenticationManager = authenticationManager;
     }
 
-    public ResponseEntity<SignInResponseDto> signin(SignInRequestDto requestDto) {
+    public ResponseEntity<APIResponse> signin(SignInRequestDto requestDto) {
         try {
             User user = getUserByUsername(requestDto.getUsername());
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestDto.getUsername(), requestDto.getPassword()));
@@ -43,32 +45,52 @@ public class UserService {
                     .username(user.getUsername())
                     .roleList(user.getRoleList())
                     .token(jwtTokenProvider.createToken(requestDto.getUsername(), user.getRoleList()))
+                    .tokenType("Bearer")
                     .build();
-            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+            return new ResponseEntity<>(APIResponse.builder().data(responseDto)
+                    .message("Success.")
+                    .time(Instant.now())
+                    .status(200)
+                    .build(), HttpStatus.OK);
         } catch (AuthenticationException e) {
             throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 
-    public ResponseEntity<SignUpResponseDto> signup(SignUpRequestDto requestDto) {
+    public ResponseEntity<APIResponse> signup(SignUpRequestDto requestDto) {
         existsByUsername(requestDto.getUsername());
         User user = UserMapper.MAPPER.toUser(requestDto);
         user.setPassword(passwordEncoder.encode(requestDto.getPassword()));
         userRepository.save(user);
-        SignUpResponseDto signUpResponseDto = SignUpResponseDto.builder()
+        SignUpResponseDto responseDto = SignUpResponseDto.builder()
                 .token(jwtTokenProvider.createToken(user.getUsername(), user.getRoleList()))
+                .tokenType("Bearer")
                 .build();
-        return new ResponseEntity<>(signUpResponseDto, HttpStatus.OK);
+        return new ResponseEntity<>(APIResponse.builder().data(responseDto)
+                .message("Success.")
+                .time(Instant.now())
+                .status(200)
+                .build(), HttpStatus.OK);
     }
 
-    public ResponseEntity<UserInfoResponseDto> search(String username) {
+    public ResponseEntity<APIResponse> search(String username) {
         User user = getUserByUsername(username);
-        return new ResponseEntity<>(UserMapper.MAPPER.toUserInfoResponseDto(user), HttpStatus.OK);
+        UserInfoResponseDto responseDto = UserMapper.MAPPER.toUserInfoResponseDto(user);
+        return new ResponseEntity<>(APIResponse.builder().data(responseDto)
+                .message("Success")
+                .time(Instant.now())
+                .status(200)
+                .build(), HttpStatus.OK);
     }
 
-    public ResponseEntity<UserInfoResponseDto> whoami(HttpServletRequest req) {
+    public ResponseEntity<APIResponse> whoami(HttpServletRequest req) {
         User user = getUserByUsername(jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(req)));
-        return new ResponseEntity<>(UserMapper.MAPPER.toUserInfoResponseDto(user), HttpStatus.OK);
+        UserInfoResponseDto responseDto = UserMapper.MAPPER.toUserInfoResponseDto(user);
+        return new ResponseEntity<>(APIResponse.builder().data(responseDto)
+                .message("Success.")
+                .time(Instant.now())
+                .status(200)
+                .build(), HttpStatus.OK);
     }
 
 //    public void delete(String username) {
