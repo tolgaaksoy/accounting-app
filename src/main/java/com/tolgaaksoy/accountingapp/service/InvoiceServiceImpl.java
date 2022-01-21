@@ -31,11 +31,11 @@ public class InvoiceServiceImpl implements InvoiceService {
     private HttpServletRequest httpServletRequest;
 
     private final InvoiceRepository invoiceRepository;
-    private final UserService userService;
+    private final UserServiceImpl userServiceImpl;
 
-    public InvoiceServiceImpl(InvoiceRepository invoiceRepository, UserService userService) {
+    public InvoiceServiceImpl(InvoiceRepository invoiceRepository, UserServiceImpl userServiceImpl) {
         this.invoiceRepository = invoiceRepository;
-        this.userService = userService;
+        this.userServiceImpl = userServiceImpl;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             response.setMessage("Your transaction could not be performed. Limit exceeded.");
             httpStatus = HttpStatus.NOT_ACCEPTABLE;
         }
-        invoice.setCreatedBy(userService.getUsernameByHttpRequest(httpServletRequest));
+        invoice.setCreatedBy(userServiceImpl.getUsernameByHttpRequest(httpServletRequest));
         Invoice savedInvoice = invoiceRepository.save(invoice);
         InvoiceResponse invoiceResponse = InvoiceMapper.MAPPER.toInvoiceResponse(savedInvoice);
         response.setData(invoiceResponse);
@@ -79,7 +79,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     private boolean checkAccountantTransactionVolume(BigDecimal requestAmount) {
-        String accountantUsername = userService.getUsernameByHttpRequest(httpServletRequest);
+        String accountantUsername = userServiceImpl.getUsernameByHttpRequest(httpServletRequest);
         BigDecimal accountantTransactionVolume = invoiceRepository.accountantTransactionVolume(accountantUsername);
         if (accountantTransactionVolume == null) {
             return true;
