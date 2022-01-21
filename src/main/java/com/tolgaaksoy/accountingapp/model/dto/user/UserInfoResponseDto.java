@@ -13,4 +13,6 @@ public class UserInfoResponseDto {
     private String username;
     private String email;
     private String role;
+    private String name;
+    private String surname;
 }
