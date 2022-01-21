@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher
@@ -17,6 +19,7 @@ spring:
       settings:
         web-allow-others: true
   jpa:
+    #show_sql: true
     hibernate:
       ddl-auto: update
     properties:
@@ -38,3 +41,6 @@ security:
     token:
       secret-key: secret-key
       expire-length: 3000000
+
+invoice:
+    limit: 500
