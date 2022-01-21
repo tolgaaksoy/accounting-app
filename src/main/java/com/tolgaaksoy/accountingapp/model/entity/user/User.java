@@ -32,4 +32,8 @@ public class User extends BaseEntity {
 
     @ElementCollection(fetch = FetchType.EAGER)
     List<Role> roleList;
+
+    private String name;
+
+    private String surname;
 }
