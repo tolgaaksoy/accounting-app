@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Builder
@@ -15,5 +15,5 @@ import java.util.Set;
 public class SignUpResponseDto {
     private String token;
     private String tokenType = "Bearer";
-    private Set<Role> roleList;
+    private List<Role> roleList;
 }

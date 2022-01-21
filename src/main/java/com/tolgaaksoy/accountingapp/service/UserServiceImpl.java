@@ -20,7 +20,7 @@ import java.time.Instant;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -67,6 +67,7 @@ public class UserServiceImpl implements UserService{
         SignUpResponseDto responseDto = SignUpResponseDto.builder()
                 .token(jwtTokenProvider.createToken(user.getUsername(), user.getRoleList()))
                 .tokenType("Bearer")
+                .roleList(user.getRoleList())
                 .build();
         return new ResponseEntity<>(APIResponse.builder().data(responseDto)
                 .message("Success.")
