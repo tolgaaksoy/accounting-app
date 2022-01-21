@@ -1,0 +1,635 @@
+{
+	"info": {
+		"_postman_id": "3ef33cc6-4796-4c19-a84b-143133e41836",
+		"name": "Accounting App API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "signup-ACCOUNTANT",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"username-1\",\n    \"password\": \"password-1\",\n    \"email\": \"mail-1@mail.com\",\n    \"roleList\": [\n        \"ROLE_ACCOUNTANT\"\n    ],\n        \"name\": \"name-1\",\n    \"surname\": \"surname-1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"eu aliqua elit Lorem\",\n    \"password\": \"occaecat consequat\",\n    \"email\": \"do commodo ad cillum fugiat\",\n    \"roleList\": [\n        \"ROLE_ACCOUNTANT\",\n        \"ROLE_ACCOUNTANT\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "signup-ADMIN",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin-1\",\n    \"password\": \"admin-1\",\n    \"email\": \"admin@mail.com\",\n    \"roleList\": [\n        \"ROLE_ADMIN\"\n    ],\n    \"name\": \"admin-name-1\",\n    \"surname\": \"admin-surname-1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"eu aliqua elit Lorem\",\n    \"password\": \"occaecat consequat\",\n    \"email\": \"do commodo ad cillum fugiat\",\n    \"roleList\": [\n        \"ROLE_ACCOUNTANT\",\n        \"ROLE_ACCOUNTANT\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"username-1\",\n    \"password\": \"password-1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/signin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"signin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"est aute dolore enim al\",\n    \"password\": \"aliquip cupidatat\",\n    \"email\": \"Ut ea velit\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/signin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"signin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "search",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbi0xIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaWF0IjoxNjQyNzc4NjM1LCJleHAiOjE2NDI3ODE2MzV9.mR-f1veX60BCrB0HnjR06R-R1CAvOp5OsxZvDk4ynM4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/:username",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":username"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": "username-1",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/users/:username",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":username"
+									],
+									"variable": [
+										{
+											"key": "username",
+											"value": "Ut consectetur ea occaecat",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "whoami",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbi0xIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaWF0IjoxNjQyNzc4NjM1LCJleHAiOjE2NDI3ODE2MzV9.mR-f1veX60BCrB0HnjR06R-R1CAvOp5OsxZvDk4ynM4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/users/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "invoice",
+			"item": [
+				{
+					"name": "create Invoice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZS0xIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9BQ0NPVU5UQU5UIn1dLCJpYXQiOjE2NDI3Nzg2MzEsImV4cCI6MTY0Mjc4MTYzMX0.fmJqQsPuzUjalp9cIPSeTK1RreaYrTquIHl0YfKLRe8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"email\": \"john@doe.com\",\n    \"amount\": 400,\n    \"productName\": \"USB DISC\",\n    \"billNo\": \"TR000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/invoice/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"invoice",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"proident esse\",\n    \"lastName\": \"quis adipisicing deserunt dolore\",\n    \"email\": \"aute velit nisi ut\",\n    \"amount\": 3729996.2385243475,\n    \"productName\": \"nulla\",\n    \"billNo\": \"ipsum ea id\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/invoice/create",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"invoice",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "search By Invoice Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZS0xIiwiYXV0aCI6W3siYXV0aG9yaXR5IjoiUk9MRV9BQ0NPVU5UQU5UIn1dLCJpYXQiOjE2NDI3Nzg2MzEsImV4cCI6MTY0Mjc4MTYzMX0.fmJqQsPuzUjalp9cIPSeTK1RreaYrTquIHl0YfKLRe8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/invoice/search?invoiceStatus=REJECT",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"invoice",
+								"search"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "-77865820",
+									"description": "(Required) ",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "{\"empty\":false,\"sorted\":true,\"unsorted\":true}",
+									"description": "(Required) ",
+									"disabled": true
+								},
+								{
+									"key": "pageNumber",
+									"value": "19225163",
+									"description": "(Required) ",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "-46933220",
+									"description": "(Required) ",
+									"disabled": true
+								},
+								{
+									"key": "unpaged",
+									"value": "true",
+									"description": "(Required) ",
+									"disabled": true
+								},
+								{
+									"key": "paged",
+									"value": "false",
+									"description": "(Required) ",
+									"disabled": true
+								},
+								{
+									"key": "invoiceStatus",
+									"value": "REJECT",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Added as a part of security scheme: bearer",
+										"key": "Authorization",
+										"value": "Bearer <token>"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/invoice/search?offset=-77865820&sort=[object Object]&pageNumber=19225163&pageSize=-46933220&unpaged=true&paged=false&invoiceStatus=REJECT",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"invoice",
+										"search"
+									],
+									"query": [
+										{
+											"key": "offset",
+											"value": "-77865820"
+										},
+										{
+											"key": "sort",
+											"value": "[object Object]"
+										},
+										{
+											"key": "pageNumber",
+											"value": "19225163"
+										},
+										{
+											"key": "pageSize",
+											"value": "-46933220"
+										},
+										{
+											"key": "unpaged",
+											"value": "true"
+										},
+										{
+											"key": "paged",
+											"value": "false"
+										},
+										{
+											"key": "invoiceStatus",
+											"value": "REJECT"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "<Bearer Token>",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
