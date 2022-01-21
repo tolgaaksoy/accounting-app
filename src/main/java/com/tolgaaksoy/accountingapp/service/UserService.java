@@ -6,7 +6,6 @@ import com.tolgaaksoy.accountingapp.model.dto.user.*;
 import com.tolgaaksoy.accountingapp.model.entity.user.User;
 import com.tolgaaksoy.accountingapp.repository.UserRepository;
 import com.tolgaaksoy.accountingapp.security.JwtTokenProvider;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,13 +18,22 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
+
+    public UserService(UserRepository userRepository,
+                       PasswordEncoder passwordEncoder,
+                       JwtTokenProvider jwtTokenProvider,
+                       AuthenticationManager authenticationManager) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtTokenProvider = jwtTokenProvider;
+        this.authenticationManager = authenticationManager;
+    }
 
     public ResponseEntity<SignInResponseDto> signin(SignInRequestDto requestDto) {
         try {
@@ -79,5 +87,11 @@ public class UserService {
         if (userRepository.existsByUsername(username)) {
             throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
+    }
+
+    public String getUsernameByHttpRequest(HttpServletRequest httpServletRequest) {
+        String token = jwtTokenProvider.resolveToken(httpServletRequest);
+        String username = jwtTokenProvider.getUsername(token);
+        return getUserByUsername(username).getUsername();
     }
 }
