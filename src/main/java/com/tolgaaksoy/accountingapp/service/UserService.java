@@ -58,7 +58,7 @@ public class UserService {
     }
 
     public ResponseEntity<APIResponse> signup(SignUpRequestDto requestDto) {
-        existsByUsername(requestDto.getUsername());
+        existsByUsernameOrEmail(requestDto.getUsername(), requestDto.getEmail());
         User user = UserMapper.MAPPER.toUser(requestDto);
         user.setPassword(passwordEncoder.encode(requestDto.getPassword()));
         userRepository.save(user);
@@ -105,9 +105,9 @@ public class UserService {
         return optionalUser.get();
     }
 
-    private void existsByUsername(String username) {
-        if (userRepository.existsByUsername(username)) {
-            throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
+    private void existsByUsernameOrEmail(String username, String email) {
+        if (userRepository.existsByUsernameOrEmail(username, email)) {
+            throw new CustomException("Username or email is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 
